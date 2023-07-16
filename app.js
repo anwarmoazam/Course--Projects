@@ -63,4 +63,5 @@ function scaleValue(input, inputRange, outputRange) {
 
 function sortData(key, order) {
     console.log(data, key,order);
+    
 }
