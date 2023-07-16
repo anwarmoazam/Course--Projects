@@ -4,8 +4,10 @@ let data = [];
 
 document.getElementById('selectors').addEventListener('change', function (event) {
     const [key, order] = event.target.value.split('.')
+    console.log(data);
     if (key && order) {
-        sortData(key, order);
+        const sortedArray = sortData(key, order);
+        renderData(sortedArray);
     }
 })
 
@@ -25,7 +27,7 @@ function renderData(data) {
                 <p>${element.description}</p>
             </div>
             <div class="raiting-details">
-                <div class="star-raiting" style="background-color: rgb(${scaleValue(element.rating, [0, 5], [0, 255])}, 255,0)">
+                <div class="star-raiting" style="background-color: rgb(${scaleValue(element.rating, [1, 5], [0, 255])}, 255,0)">
                     <span class="star"><svg class="MuiSvgIcon-root" focusable="false" viewBox="0 0 24 24" aria-hidden="true">
                         <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"></path></svg></span><span class="rating">${element.rating}</span>
                 </div>
@@ -62,6 +64,27 @@ function scaleValue(input, inputRange, outputRange) {
 }
 
 function sortData(key, order) {
-    console.log(data, key,order);
-    
+    console.log(data, key, order);
+    const anotherArray = [...data];
+    anotherArray.sort((item1,item2) => {
+        if(order === 'asc'){
+            if(item1[key] < item2[key]){
+                return -1;
+            }
+            if(item1[key] > item2[key]){
+                return 1;
+            }
+            return 0;
+        } else{
+            if(item2[key] < item1[key]){
+                return -1;
+            }
+            if(item2[key] > item1[key]){
+                return 1;
+            }
+            return 0;
+        }
+    })
+    // anotherArray.forEach(item => console.log(item[key]));
+    return anotherArray;
 }
