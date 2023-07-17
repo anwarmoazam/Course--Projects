@@ -41,9 +41,9 @@ function renderData(data) {
         </div>
         <div class="add-remove">
         <div class="counter">
-        <button>-</button>
-        <span class="">0</span>
-        <button>+</button>
+        <button class="decrease">-</button>
+        <span class="item-count">0</span>
+        <button class="increase">+</button>
         </div>
         </div>
         </div>`
@@ -57,7 +57,17 @@ function renderData(data) {
     cards.appendChild(fragmentDOM);
 
     const addRemoveButtons = document.querySelectorAll('.counter');
-    addRemoveButtons.forEach(button => console.log(button.children))
+    addRemoveButtons.forEach(item => item.addEventListener('click',function(event){
+        console.log(event.target.parentElement);
+        let itemCount = event.target.parentElement.querySelector('.item-count');
+        console.log(itemCount.innerText);
+        if(event.target.classList.contains('increase')){
+            itemCount.innerText++;
+        }
+        if(event.target.classList.contains('decrease')){
+            itemCount.innerText--;
+        }
+    }))
 }
 
 
